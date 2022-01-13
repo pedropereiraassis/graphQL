@@ -1,32 +1,42 @@
 const { ApolloServer } = require('apollo-server');
 
-// 1
 const typeDefs = `
   type Query {
     info: String!
-    users: [User!]!
-    user(id: ID!): User
+    feed: [Link!]!
   }
 
-  type Mutation {
-    createUser(name: String!): User!
-  }
-
-  type User {
+  type Link {
     id: ID!
-    name: String!
+    description: String!
+    url: String!
   }
 `
 
-// 2
+let links = [{
+  id: 'link-0',
+  url: 'www.howtographql.com',
+  description: 'Fullstack tutorial for GraphQL'
+},
+{
+  id: 'link-1',
+  url: 'www.howtographql-1.com',
+  description: 'Fullstack tutorial for GraphQL-1'
+}]
+
 const resolvers = {
   Query: {
     info: () => `This is the API of a Hackernews Clone`,
-    users: () => `["Eu", "tu"]`
+    feed: () => links,
+  },
+
+  Link: {
+    id: (parent) => parent.id,
+    description: (parent) => parent.description,
+    url: (parent) => parent.url,
   }
 }
 
-// 3
 const server = new ApolloServer({
   typeDefs,
   resolvers,
