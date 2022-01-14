@@ -6,13 +6,19 @@ let links = [{
   id: 'link-0',
   url: 'www.howtographql.com',
   description: 'Fullstack tutorial for GraphQL'
-}
-]
+}]
 
 const resolvers = {
   Query: {
     info: () => `This is the API of a Hackernews Clone`,
     feed: () => links,
+    link: (parent, args) => {
+      let idCount = links.length
+      while(links[idCount].id != args.id) {
+        idCount++
+      }
+      return links[idCount]
+    }
   },
   Mutation: {
     post: (parent, args) => {
