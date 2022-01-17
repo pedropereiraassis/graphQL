@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/pedropereiraassis/graphQL#readme",
   "dependencies": {
+    "@prisma/client": "^3.8.1",
     "apollo-server": "^2.25.3",
     "graphql": "^14.7.0"
+  },
+  "devDependencies": {
+    "prisma": "^3.8.1"
   }
 }
