@@ -7,15 +7,19 @@ const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
 const User = require('./resolvers/User')
 const Link = require('./resolvers/Link')
+const { PubSub } = require('apollo-server')
+const Subscription = require('./resolvers/Subscription')
 
 const resolvers = {
   Query,
   Mutation,
   User,
-  Link
+  Link,
+  Subscription
 }
 
 const prisma = new PrismaClient()
+const pubsub = new PubSub()
 
 const server = new ApolloServer({
   typeDefs: fs.readFileSync(
@@ -27,6 +31,7 @@ const server = new ApolloServer({
     return {
       ...req,
       prisma,
+      pubsub,
       userId:
         req && req.headers.authorization
           ? getUserId(req)
