@@ -9,13 +9,15 @@ const User = require('./resolvers/User')
 const Link = require('./resolvers/Link')
 const { PubSub } = require('apollo-server')
 const Subscription = require('./resolvers/Subscription')
+const Vote = require('./resolvers/Vote')
 
 const resolvers = {
   Query,
   Mutation,
   User,
   Link,
-  Subscription
+  Subscription,
+  Vote
 }
 
 const prisma = new PrismaClient()
